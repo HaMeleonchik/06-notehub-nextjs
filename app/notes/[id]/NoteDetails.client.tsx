@@ -7,11 +7,11 @@ import style from "../../components/loaderErrorCss/loaderErrorCss.module.css"
 
 export default function NoteDetailsClient() {
     
-    const { noteId } = useParams<{ noteId: string }>();
+    const { id } = useParams<{ id: string }>();
     
  const {data:note, isLoading, isError} = useQuery({
-        queryKey: ["notes", noteId],
-         queryFn: () => fetchNoteById(noteId),
+        queryKey: ["notes", id],
+         queryFn: () => fetchNoteById(id),
         refetchOnMount:false,
  })    
     return <div className={css.container}>
