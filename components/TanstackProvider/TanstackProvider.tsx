@@ -6,7 +6,7 @@ interface Props{
     children: React.ReactNode
 }
 
-export default function TanstackProvider({children}:Props) {
+export default function TanStackProvider({children}:Props) {
     const [qClient] = useState( () => new QueryClient)
 
     return (
