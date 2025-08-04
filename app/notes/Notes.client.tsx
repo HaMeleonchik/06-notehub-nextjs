@@ -10,10 +10,19 @@ import NoteForm from "../../components/NoteForm/NoteForm";
 import { useQuery, keepPreviousData} from '@tanstack/react-query';
 import { useDebounce } from "use-debounce";
 import { useState } from "react";
-export default function NotesClient() {
-  const [query, setQuery] = useState("")
+import { Note } from "@/types/note"
+
+interface initialDataProps{
+  initialNotes: Note[];
+  initialTotalPages: number;
+  initialSearchQuery: string;
+  initialPage: number;
+}
+
+export default function NotesClient({initialNotes, initialTotalPages, initialSearchQuery, initialPage}:initialDataProps) {
+  const [query, setQuery] = useState(initialSearchQuery)
   const [isOpenModal, setOpenModal] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(initialPage)
 
   const [debouncedSearchQuery] = useDebounce(query, 300)
 
@@ -21,6 +30,10 @@ export default function NotesClient() {
     queryKey: ["notes", debouncedSearchQuery, currentPage],
     queryFn: () => fetchNotes(debouncedSearchQuery, currentPage),
     placeholderData: keepPreviousData,
+    initialData: {
+      notes: initialNotes,
+      totalPages: initialTotalPages,
+    }
   })
   
   

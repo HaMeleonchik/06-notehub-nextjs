@@ -1,4 +1,4 @@
-import css from "./header.module.css"
+import css from "./Header.module.css"
 import Link from "next/link"
 export default function Header() {
 return <header className={css.header}>

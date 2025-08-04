@@ -7,7 +7,7 @@ interface Props{
 }
 
 export default function TanStackProvider({children}:Props) {
-    const [qClient] = useState( () => new QueryClient)
+    const [qClient] = useState( () => new QueryClient())
 
     return (
         <QueryClientProvider client={qClient}>{children}</QueryClientProvider>

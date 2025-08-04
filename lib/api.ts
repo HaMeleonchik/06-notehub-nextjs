@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { NoteDetails, NewPostNote, Note } from "../types/note";
+// NoteDetails
+import type {  NewNote, Note } from "../types/note";
 
 interface NoteHttpResponse{
     notes: Note[], 
@@ -29,7 +30,7 @@ export async function fetchNotes(searchQuery: string, page: number): Promise<{no
 
 
 
-export async function createNote(taskData: NewPostNote) {
+export async function createNote(taskData: NewNote): Promise<Note> {
     const response = await axios.post<Note>(url, taskData, {
         headers: {
             Authorization: `Bearer ${myKey}`,
@@ -42,7 +43,7 @@ export async function createNote(taskData: NewPostNote) {
 }
 
 
-export async function deleteNote(taskId: number) {
+export async function deleteNote(taskId: string):Promise<Note> {
 const response = await axios.delete<Note>(`${url}/${taskId}`, {
         headers: {
             Authorization: `Bearer ${myKey}`,
@@ -53,8 +54,8 @@ const response = await axios.delete<Note>(`${url}/${taskId}`, {
 }
 
 
-export async function fetchNoteById(noteId: string) {
-const response = await axios.get<NoteDetails>(`${url}/${noteId}`, {
+export async function fetchNoteById(noteId: string): Promise<Note> {
+const response = await axios.get<Note>(`${url}/${noteId}`, {
         headers: {
             Authorization: `Bearer ${myKey}`,
         }
