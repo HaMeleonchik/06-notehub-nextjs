@@ -1,4 +1,4 @@
-import { fetchNoteById } from "@/app/lib/api"
+import { fetchNoteById } from "../../../lib/api"
 // import css  from "./NoteDetails.module.css"
 import NoteDetailsClient from "./NoteDetails.client"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
@@ -16,7 +16,6 @@ export default async function NoteDetails({ params}: Props) {
     queryFn: () => fetchNoteById(id),
   })
   
-  // const note = await fetchNoteById(noteId) 
 
   return<HydrationBoundary state={dehydrate(queryClient)}>
          <NoteDetailsClient />
